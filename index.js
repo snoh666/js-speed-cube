@@ -15,6 +15,12 @@ const fruit = {
   },
   draw: () => {
     ctx.arc(fruit.posX, fruit.posY, 5, 0, Math.PI * 2);
+  },
+  check: () => {
+    if(fruit.posX + 10 >= player.posX && fruit.posX - 10 <= player.posX + 20 && fruit.posY + 10 >= player.posY && fruit.posY - 10 <= player.posY + 20) {
+      fruit.spawn();
+      console.log('Fruit eaten');
+    }
   }
 };
 const player = {
@@ -29,6 +35,7 @@ const player = {
 
     ctx.clearRect(0, 0, 600, 600);
     ctx.beginPath();
+    fruit.check();
     if(fruit.spawned === true) {
       fruit.draw();
     } else {
