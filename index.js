@@ -41,17 +41,25 @@ const player = {
   },
   movement: e => {
     if(e.key === 'a' || e.key === 'ArrowLeft') {
-      player.moveDir[0] = -player.speedVal;
-      player.moveDir[1] = 0;
+      if(player.moveDir[0] === 0) {
+        player.moveDir[0] = -player.speedVal;
+        player.moveDir[1] = 0;
+      }
     } else if (e.key === 'd' || e.key === 'ArrowRight') {
-      player.moveDir[0] = player.speedVal;
-      player.moveDir[1] = 0;
+      if(player.moveDir[0] === 0) {
+        player.moveDir[0] = player.speedVal;
+        player.moveDir[1] = 0;
+      }
     } else if (e.key === 'w' || e.key === 'ArrowUp') {
-      player.moveDir[0] = 0;
-      player.moveDir[1] = -player.speedVal;
+      if(player.moveDir[1] === 0) {
+        player.moveDir[0] = 0;
+        player.moveDir[1] = -player.speedVal;
+      }
     } else if (e.key === 's' || e.key === 'ArrowDown') {
-      player.moveDir[0] = 0;
-      player.moveDir[1] = player.speedVal;
+      if(player.moveDir[1] === 0) {
+        player.moveDir[0] = 0;
+        player.moveDir[1] = player.speedVal;
+      }
     }
   },
   checkPos: () => {
