@@ -81,7 +81,7 @@ const fruit = {
     ctx.arc(fruit.posX, fruit.posY, 5, 0, Math.PI * 2);
   },
   check: () => {
-    if (fruit.posX + 10 >= player.posX && fruit.posX - 10 <= player.posX + 20 && fruit.posY + 10 >= player.posY && fruit.posY - 10 <= player.posY + 20) {
+    if (fruit.posX + 5 >= player.posX && fruit.posX - 5 <= player.posX + 20 && fruit.posY + 5 >= player.posY && fruit.posY - 5 <= player.posY + 20) {
       fruit.spawn();
       score++;
     }
