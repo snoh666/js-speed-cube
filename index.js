@@ -4,6 +4,19 @@ canvas.height = 600;
 let animate = null;
 
 const ctx = canvas.getContext('2d');
+const fruit = {
+  posX: 0,
+  posY: 0,
+  spawned: false,
+  spawn: () => {
+    fruit.spawned = true;
+    fruit.posX = Math.random() * ((canvas.width - 20) - 10) + 10;
+    fruit.posY = Math.random() * ((canvas.height - 20) - 10) + 10;
+  },
+  draw: () => {
+    ctx.arc(fruit.posX, fruit.posY, 5, 0, Math.PI * 2);
+  }
+};
 const player = {
   posX: 600 / 2 - 10,
   posY: 600 / 2 - 10,
@@ -16,6 +29,11 @@ const player = {
 
     ctx.clearRect(0, 0, 600, 600);
     ctx.beginPath();
+    if(fruit.spawned === true) {
+      fruit.draw();
+    } else {
+      fruit.spawn();
+    }
     ctx.strokeRect(player.posX, player.posY, 20, 20);
     if(player.moveDir[0] !== 0) {
       player.posX += player.moveDir[0];
