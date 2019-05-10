@@ -5,6 +5,7 @@ let animate = null;
 
 const ctx = canvas.getContext('2d');
 
+let score = 0;
 const player = {
   posX: 600 / 2 - 10,
   posY: 600 / 2 - 10,
@@ -13,11 +14,12 @@ const player = {
   draw: () => {
     animate = requestAnimationFrame(player.draw);
 
-    player.checkPos();
 
     ctx.clearRect(0, 0, 600, 600);
     ctx.beginPath();
+    player.checkPos();
     fruit.check();
+    player.drawScore();
     if(fruit.spawned === true) {
       fruit.draw();
     } else {
@@ -31,8 +33,13 @@ const player = {
     }
     ctx.stroke();
   },
+  drawScore: () => {
+    ctx.beginPath();
+    ctx.font = '20px Arial';
+    ctx.fillText(`Score: ${score}`, canvas.width / 5 * 4, 20);
+    ctx.fill();
+  },
   movement: e => {
-    console.log(e);
     if(e.key === 'a' || e.key === 'ArrowLeft') {
       player.moveDir[0] = -player.speedVal;
       player.moveDir[1] = 0;
@@ -53,9 +60,12 @@ const player = {
     }
   },
   gameOver: () => {
-    cancelAnimationFrame(animate);
     player.movement = () => {};
-    console.log('GAME OVER!');
+    cancelAnimationFrame(animate);
+    ctx.beginPath();
+    ctx.font = '50px Arial';
+    ctx.fillText('Game Over!', canvas.width / 2 - 140, canvas.height / 2);
+    ctx.fill();
   }
 };
 const fruit = {
@@ -73,7 +83,7 @@ const fruit = {
   check: () => {
     if (fruit.posX + 10 >= player.posX && fruit.posX - 10 <= player.posX + 20 && fruit.posY + 10 >= player.posY && fruit.posY - 10 <= player.posY + 20) {
       fruit.spawn();
-      console.log('Fruit eaten');
+      score++;
     }
   }
 };
