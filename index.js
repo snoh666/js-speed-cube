@@ -1,8 +1,13 @@
+let windowOver = false;
+
 const startGame = () => {
   const canvas = document.querySelector('canvas');
   canvas.width = 600;
   canvas.height = 600;
   let animate = null;
+  if(windowOver === true) {
+    window.removeEventListener('click', startGame);
+  }
 
   const ctx = canvas.getContext('2d');
 
@@ -76,7 +81,8 @@ const startGame = () => {
       ctx.font = '40px Arial';
       ctx.fillText('Game Over! Click to restart.', 50, canvas.height / 2);
       ctx.fill();
-      window.addEventListener('click', () => {window.location = './'});
+      window.addEventListener('click', startGame);
+      windowOver = true;
     }
   };
   const fruit = {
