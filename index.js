@@ -7,6 +7,7 @@ const startGame = () => {
   let animate = null;
   if(windowOver === true) {
     window.removeEventListener('click', startGame);
+    document.removeEventListener('keypress', startGame);
   }
 
   const ctx = canvas.getContext('2d');
@@ -82,6 +83,7 @@ const startGame = () => {
       ctx.fillText('Game Over! Click to restart.', 50, canvas.height / 2);
       ctx.fill();
       window.addEventListener('click', startGame);
+      document.addEventListener('keypress', startGame);
       windowOver = true;
     }
   };
