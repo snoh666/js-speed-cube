@@ -72,9 +72,10 @@ const startGame = () => {
       player.movement = () => { };
       cancelAnimationFrame(animate);
       ctx.beginPath();
-      ctx.font = '50px Arial';
-      ctx.fillText('Game Over!', canvas.width / 2 - 140, canvas.height / 2);
+      ctx.font = '40px Arial';
+      ctx.fillText('Game Over! Click to restart.', 50, canvas.height / 2);
       ctx.fill();
+      window.addEventListener('click', () => {window.location = './'});
     }
   };
   const fruit = {
@@ -101,3 +102,5 @@ const startGame = () => {
   player.draw();
   document.addEventListener('keydown', e => player.movement(e));
 };
+
+document.addEventListener('DOMContentLoaded', startGame);
