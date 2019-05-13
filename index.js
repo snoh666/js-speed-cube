@@ -6,6 +6,7 @@ const startGame = () => {
 
   const ctx = canvas.getContext('2d');
 
+  const eatBoop = document.querySelector('audio');
   let score = 0;
   const player = {
     posX: 600 / 2 - 10,
@@ -95,6 +96,8 @@ const startGame = () => {
         fruit.spawn();
         score++;
         player.speedVal += .5;
+        eatBoop.currentTime = 0;
+        eatBoop.play();
       }
     }
   };
