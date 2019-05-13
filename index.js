@@ -92,6 +92,7 @@ const fruit = {
     if (fruit.posX + 5 >= player.posX && fruit.posX - 5 <= player.posX + 20 && fruit.posY + 5 >= player.posY && fruit.posY - 5 <= player.posY + 20) {
       fruit.spawn();
       score++;
+      player.speedVal += .5;
     }
   }
 };
