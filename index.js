@@ -1,4 +1,11 @@
 let windowOver = false;
+document.getElementById('theme-black').addEventListener('click', function() {
+  if(this.checked) {
+    document.body.classList.add('dark-themed');
+  } else {
+    document.body.classList.remove('dark-themed');
+  }
+});
 
 const startGame = () => {
   const canvas = document.querySelector('canvas');
@@ -13,6 +20,9 @@ const startGame = () => {
   const ctx = canvas.getContext('2d');
 
   const eatBoop = document.querySelector('audio');
+  const themeCheck = (element) => {
+    return element ? '#dfe6e9' : '#2d3436';
+  };
   let score = 0;
   const player = {
     posX: 600 / 2 - 10,
@@ -27,6 +37,8 @@ const startGame = () => {
       ctx.beginPath();
       player.checkPos();
       fruit.check();
+      ctx.strokeStyle = themeCheck(document.getElementById('theme-black').checked);
+      ctx.fillStyle = themeCheck(document.getElementById('theme-black').checked);
       player.drawScore();
       if (fruit.spawned === true) {
         fruit.draw();
