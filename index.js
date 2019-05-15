@@ -94,7 +94,7 @@ const startGame = () => {
     spawn: () => {
       fruit.spawned = true;
       fruit.posX = Math.random() * ((canvas.width - 20) - 10) + 10;
-      fruit.posY = Math.random() * ((canvas.height - 20) - 10) + 10;
+      fruit.posY = Math.random() * ((canvas.height - 40) - 10) + 30;
     },
     draw: () => {
       ctx.arc(fruit.posX, fruit.posY, 5, 0, Math.PI * 2);
