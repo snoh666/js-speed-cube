@@ -1,11 +1,32 @@
+if (localStorage.getItem('settings') === null) {
+  syncSettings();
+  console.log('Syncing');
+} else {
+  const itemLocal = JSON.parse(localStorage.getItem('settings'));
+  console.log(itemLocal);
+  if (itemLocal.dark === true) {
+    console.log('true');
+    document.body.classList.add('dark-themed');
+    document.getElementById('theme-black').checked = true;
+  }
+}
+
 let windowOver = false;
+
 document.getElementById('theme-black').addEventListener('click', function() {
   if(this.checked) {
+    syncSettings();
     document.body.classList.add('dark-themed');
   } else {
+    syncSettings();
     document.body.classList.remove('dark-themed');
   }
 });
+
+const syncSettings = () => {
+  const checkbox = document.getElementById('theme-black');
+  localStorage.setItem('settings', JSON.stringify({ dark: checkbox.checked }));
+};
 
 const startGame = () => {
   const canvas = document.querySelector('canvas');
