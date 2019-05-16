@@ -1,3 +1,9 @@
+const syncSettings = () => {
+  const checkbox = document.getElementById('theme-black');
+  localStorage.setItem('settings', JSON.stringify({ dark: checkbox.checked }));
+};
+
+
 if (localStorage.getItem('settings') === null) {
   syncSettings();
 } else {
@@ -19,11 +25,6 @@ document.getElementById('theme-black').addEventListener('click', function() {
     document.body.classList.remove('dark-themed');
   }
 });
-
-const syncSettings = () => {
-  const checkbox = document.getElementById('theme-black');
-  localStorage.setItem('settings', JSON.stringify({ dark: checkbox.checked }));
-};
 
 const startGame = () => {
   const canvas = document.querySelector('canvas');
