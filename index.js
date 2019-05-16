@@ -14,7 +14,7 @@ if (localStorage.getItem('settings') === null) {
   }
 }
 
-let windowOver = false;
+let isGameOver = false;
 
 document.getElementById('theme-black').addEventListener('click', function() {
   if(this.checked) {
@@ -31,7 +31,7 @@ const startGame = () => {
   canvas.width = 600;
   canvas.height = 600;
   let animate = null;
-  if(windowOver === true) {
+  if(isGameOver === true) {
     window.removeEventListener('click', startGame);
     document.removeEventListener('keypress', startGame);
   }
@@ -124,7 +124,7 @@ const startGame = () => {
       ctx.fill();
       window.addEventListener('click', startGame);
       document.addEventListener('keypress', startGame);
-      windowOver = true;
+      isGameOver = true;
     }
   };
   const fruit = {
