@@ -41,40 +41,49 @@ const startGame = () => {
   const themeCheck = (element) => {
     return element ? '#dfe6e9' : '#2d3436';
   };
-  let score = 0;
+  const main = {
+    score: 0,
+    draw: () => {
+      animate = requestAnimationFrame(main.draw);
+
+      ctx.clearRect(0, 0, 600, 600);
+      ctx.beginPath();
+
+      player.checkPos();
+      fruit.check();
+
+      ctx.strokeStyle = themeCheck(document.getElementById('theme-black').checked);
+      ctx.fillStyle = themeCheck(document.getElementById('theme-black').checked);
+
+      player.drawScore();
+      player.draw();
+
+      if (player.moveDir[0] !== 0) {
+        player.posX += player.moveDir[0];
+      } else if (player.moveDir[1] !== 0) {
+        player.posY += player.moveDir[1];
+      }
+      if (fruit.spawned === true) {
+        fruit.draw();
+      } else {
+        fruit.spawn();
+      }
+
+      ctx.stroke();
+    }
+  };
   const player = {
     posX: 600 / 2 - 10,
     posY: 600 / 2 - 10,
     speedVal: 2,
     moveDir: [0, 0],
     draw: () => {
-      animate = requestAnimationFrame(player.draw);
-
-
-      ctx.clearRect(0, 0, 600, 600);
-      ctx.beginPath();
-      player.checkPos();
-      fruit.check();
-      ctx.strokeStyle = themeCheck(document.getElementById('theme-black').checked);
-      ctx.fillStyle = themeCheck(document.getElementById('theme-black').checked);
-      player.drawScore();
-      if (fruit.spawned === true) {
-        fruit.draw();
-      } else {
-        fruit.spawn();
-      }
       ctx.strokeRect(player.posX, player.posY, 20, 20);
-      if (player.moveDir[0] !== 0) {
-        player.posX += player.moveDir[0];
-      } else if (player.moveDir[1] !== 0) {
-        player.posY += player.moveDir[1];
-      }
-      ctx.stroke();
     },
     drawScore: () => {
       ctx.beginPath();
       ctx.font = '20px Arial';
-      ctx.fillText(`Score: ${score}`, canvas.width / 5 * 4, 20);
+      ctx.fillText(`Score: ${main.score}`, canvas.width / 5 * 4, 20);
       ctx.fill();
     },
     movement: e => {
@@ -132,7 +141,7 @@ const startGame = () => {
     check: () => {
       if (fruit.posX + 5 >= player.posX && fruit.posX - 5 <= player.posX + 20 && fruit.posY + 5 >= player.posY && fruit.posY - 5 <= player.posY + 20) {
         fruit.spawn();
-        score++;
+        main.score++;
         player.speedVal += .5;
         eatBoop.currentTime = 0;
         eatBoop.play();
@@ -140,7 +149,7 @@ const startGame = () => {
     }
   };
 
-  player.draw();
+  main.draw();
   document.addEventListener('keydown', e => player.movement(e));
 };
 
