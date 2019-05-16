@@ -1,11 +1,8 @@
 if (localStorage.getItem('settings') === null) {
   syncSettings();
-  console.log('Syncing');
 } else {
   const itemLocal = JSON.parse(localStorage.getItem('settings'));
-  console.log(itemLocal);
   if (itemLocal.dark === true) {
-    console.log('true');
     document.body.classList.add('dark-themed');
     document.getElementById('theme-black').checked = true;
   }
