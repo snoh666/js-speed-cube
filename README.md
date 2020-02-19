@@ -6,3 +6,4 @@ After showing to my friends it just really hitted them and after few weeks i and
 ## What i learned?
 * canvas drawing
 * creating simply games in js without libraries
+* managing localStorage items
